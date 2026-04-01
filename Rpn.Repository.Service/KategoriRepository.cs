@@ -26,7 +26,7 @@ namespace Rpn.Repository.Service
 
             try
             {
-                _sql = @"SELECT KategoriID, Nama, Deskripsi FROM Kategori ORDER BY Nama";
+                _sql = @"SELECT KategoriID, Nama, Deskripsi, Create_at, Update_at FROM Kategori ORDER BY Nama";
 
                 using (IDapperContext context = new DapperContext())
                 {
@@ -47,7 +47,7 @@ namespace Rpn.Repository.Service
 
             try
             {
-                _sql = @"SELECT KategoriID, Nama, Deskripsi FROM Kategori WHERE KategoriID = @KategoriID";
+                _sql = @"SELECT KategoriID, Nama, Deskripsi, Create_at, Update_at FROM Kategori WHERE KategoriID = @KategoriID";
                 using (IDapperContext context = new DapperContext())
                 {
                     kategori = context.db.Query<Kategori>(_sql, new { KategoriID = kategoriId }).SingleOrDefault();
@@ -66,7 +66,7 @@ namespace Rpn.Repository.Service
 
             try
             {
-                _sql = @"SELECT KategoriID, Nama, Deskripsi FROM Kategori WHERE Nama LIKE @Nama ORDER BY Nama";
+                _sql = @"SELECT KategoriID, Nama, Deskripsi, Create_at, Update_at FROM Kategori WHERE Nama LIKE @Nama ORDER BY Nama";
                 
                 nama = string.Format("%{0}%", nama);
 
@@ -87,11 +87,13 @@ namespace Rpn.Repository.Service
 
             try
             {
-                _sql = @"INSERT INTO Kategori (Nama, Deskripsi) VALUES (@Nama, @Deskripsi)";
+                _sql = @"INSERT INTO Kategori (Nama, Deskripsi, Create_at, Update_at) VALUES (@Nama, @Deskripsi, @Create_at, @Update_at)";
+
+                
 
                 using (IDapperContext context = new DapperContext())
                 {
-                    result = context.db.Execute(_sql, new { Nama = obj.Nama, Deskripsi = obj.Deskripsi });
+                    result = context.db.Execute(_sql, new { Nama = obj.Nama, Deskripsi = obj.Deskripsi, Create_at = obj.Create_at, Update_at = obj.Update_at });
 
                     if (result > 0)
                     {
@@ -113,10 +115,11 @@ namespace Rpn.Repository.Service
 
             try
             {
-                _sql = @"UPDATE Kategori SET Nama = @Nama, Deskripsi = @Deskripsi WHERE KategoriID = @KategoriID";
+                _sql = @"UPDATE Kategori SET Nama = @Nama, Deskripsi = @Deskripsi, Update_at = @Update_at WHERE KategoriID = @KategoriID";
+                
                 using (IDapperContext context = new DapperContext())
                 {
-                    result = context.db.Execute(_sql, new { Nama = obj.Nama, Deskripsi = obj.Deskripsi, KategoriID = obj.KategoriID });
+                    result = context.db.Execute(_sql, new { Nama = obj.Nama, Deskripsi = obj.Deskripsi, KategoriID = obj.KategoriID , Update_at = obj.Update_at });
                 }
             }
             catch

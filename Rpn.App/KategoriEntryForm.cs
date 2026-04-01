@@ -58,10 +58,20 @@ namespace Rpn.App
 
             var result = 0;
 
-            if(isNewData)
+            if (isNewData)
+            {
+
+                _kategori.Create_at = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
+                _kategori.Update_at = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 result = _kategoriRepository.Simpan(_kategori);
+            }
             else
+            {
+
+                _kategori.Update_at = DateTime.Now.ToString("dd-MM-yyyy HH:mm:ss");
                 result = _kategoriRepository.Ubah(_kategori);
+            }
+                
 
             if (result > 0)
             {

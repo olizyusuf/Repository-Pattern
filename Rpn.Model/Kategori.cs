@@ -11,5 +11,7 @@ namespace Rpn.Model
         public int KategoriID { get; set; }
         public string Nama { get; set; }
         public string Deskripsi { get; set; }
+        public string Create_at {  get; set; }
+        public string Update_at { get; set; }
     }
 }

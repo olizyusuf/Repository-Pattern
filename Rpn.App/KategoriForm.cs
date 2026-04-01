@@ -36,8 +36,10 @@ namespace Rpn.App
             LvwKategori.GridLines = true;
 
             LvwKategori.Columns.Add("No.", 30, HorizontalAlignment.Center);
-            LvwKategori.Columns.Add("Nama", 300, HorizontalAlignment.Left);
-            LvwKategori.Columns.Add("Deskripsi", 325, HorizontalAlignment.Left);
+            LvwKategori.Columns.Add("Nama", 60, HorizontalAlignment.Left);
+            LvwKategori.Columns.Add("Deskripsi", 250, HorizontalAlignment.Left);
+            LvwKategori.Columns.Add("Create_at", 130, HorizontalAlignment.Left);
+            LvwKategori.Columns.Add("Update_at", 130, HorizontalAlignment.Left);
         }
 
         private void FillToListView(bool isNewData, Kategori kategori)
@@ -49,6 +51,8 @@ namespace Rpn.App
                 ListViewItem item = new ListViewItem(noUrut.ToString());
                 item.SubItems.Add(kategori.Nama);
                 item.SubItems.Add(kategori.Deskripsi);
+                item.SubItems.Add(kategori.Create_at);
+                item.SubItems.Add(kategori.Update_at);
 
                 LvwKategori.Items.Add(item);
             }
@@ -59,6 +63,8 @@ namespace Rpn.App
                 ListViewItem itemRow = LvwKategori.Items[row];
                 itemRow.SubItems[2].Text = kategori.Nama;
                 itemRow.SubItems[3].Text = kategori.Deskripsi;
+                itemRow.SubItems[4].Text = kategori.Create_at;
+                itemRow.SubItems[5].Text = kategori.Update_at;
             }
         }
 
